@@ -36,7 +36,7 @@ deploy:
     key: cogather-webservice.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip # 압축 확장자
     application: cogather-webservice # 웹콘솔에서 등록한 CodeDeploy 애플리케이션
-    deployment_group: cogather-webervice-group # codedeploy 배포 그룹
+    deployment_group: cogather-webservice-group # codedeploy 배포 그룹
     region: ap-northeast-2
     wait-until-deployed: true
     
