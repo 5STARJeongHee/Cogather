@@ -128,8 +128,8 @@ qhxmaoflr/cogather-tomcat 이라는 별도의 톰캣 컨테이너를 만들기 �
 
 compose 파일이 위치한 곳에서 
 
-```console
 cogather\docker\tomcat> 
+```console
 sudo docker-compose up -d
 ```
 
