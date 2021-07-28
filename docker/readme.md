@@ -129,7 +129,8 @@ qhxmaoflr/cogather-tomcat 이라는 별도의 톰캣 컨테이너를 만들기 �
 compose 파일이 위치한 곳에서 
 
 ```console
-cogather\docker\tomcat> compose up -d
+cogather\docker\tomcat> 
+sudo docker-compose up -d
 ```
 
 클라우드에 올리고 싶다면 클라우드 서버에 docker를 설치하고 
