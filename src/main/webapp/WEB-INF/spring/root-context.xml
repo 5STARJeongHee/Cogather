@@ -3,15 +3,13 @@
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
-  xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-  http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd">	
 	<!-- Root Context: defines shared resources visible to all other web components -->
   <!-- 암호화 설정 객체 생성 -->
   <bean id="environmentVariablesConfiguration" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">  
     <property name="algorithm" value="PBEWithMD5AndDES" />  
-    <property name="password" value="BRACE_PASS" />
+    <property name="passwordEnvName" value="jPass" />
   </bean>
 
   <bean id="configurationEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">  

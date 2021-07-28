@@ -27,7 +27,10 @@
 	<resources mapping="/templates/**" location="/templates/" />
 	<resources mapping="/pimgupload/**" location="/pimgupload/" />
 
-	
+	<!-- 프로퍼티 파일 읽어오기 -->
+	<context:property-placeholder location="classpath:config/*"/>
+
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

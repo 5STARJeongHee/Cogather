@@ -10,7 +10,7 @@ public class Batch {
 		int cnt = 0;           // executeUpdate(), DML 결과
 		
 		final String DRIVER = "oracle.jdbc.driver.OracleDriver";	  // JDBC 드라이버 클래스
-		final String URL = "jdbc:oracle:thin:@localhost:1521:XE";   // DB 접속 URL
+		final String URL = "jdbc:oracle:thin:@oracle-db:1521:XE";   // DB 접속 URL
 		final String USERID = "cogather";   // DB 접속 계정 정보
 		final String USERPW = "1234";
 		

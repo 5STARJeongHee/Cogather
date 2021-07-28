@@ -43,12 +43,8 @@ public class SeatsTest {
 	
 
 	// 자동 주입 받을 PasswordEncoder 와 DataSource 객체
-	private DataSource ds;
-
-	public DataSource getDs() {return ds;}
 	@Autowired
-	public void setDs(DataSource ds) {this.ds = ds;}
-
+	private DataSource ds;
 
 	Connection conn = null;
 	PreparedStatement pstmt = null;
