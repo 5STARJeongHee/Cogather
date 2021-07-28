@@ -3,10 +3,33 @@
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd 
 	http://www.springframework.org/schema/beans/spring-beans.xsd">	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
+  <!-- 암호화 설정 객체 생성 -->
+  <bean id="environmentVariablesConfiguration" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">  
+    <property name="algorithm" value="PBEWithMD5AndDES" />  
+    <property name="password" value="BRACE_PASS" />
+  </bean>
+
+  <bean id="configurationEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">  
+    <property name="config" ref="environmentVariablesConfiguration" />  
+  </bean>  
+  <bean id="propertyConfigurer" class="org.jasypt.spring3.properties.EncryptablePropertyPlaceholderConfigurer">  
+    <constructor-arg ref="configurationEncryptor" />  
+    <property name="locations">  
+      <list>  
+        <value>classpath:config/db.properties</value>
+      </list>  
+    </property>  
+  </bean>
+  <!-- 암호화 설정 객체 생성 end -->
+
+  <!-- 프로퍼티 파일 삽입 (여러개면 콤마로 구분해서 한번에 넣어줄 수 있음)
+	<context:property-placeholder
+		location="classpath:test.properties" /> -->
 	
 	
 	
@@ -26,18 +49,23 @@
   </bean>
 
 		<!-- DataSource 객체  oracle-db는 host 이름으로 docker oracle container의 alias로 지정-->
-	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
-		<beans:property name="username" value="cogather"/>
-		<beans:property name="password" value="1234"/>
-	</beans:bean>
-
+  <beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <beans:property name="driverClassName" value="${db.driver}"/>
+    <beans:property name="url" value="${db.url}"/>
+    <beans:property name="username" value="${db.id}"/>
+    <beans:property name="password" value="${db.passward}"/>
+  </beans:bean>
+  <!-- <beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+    <beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+    <beans:property name="username" value="cogather"/>
+    <beans:property name="password" value="1234"/>
+  </beans:bean> -->
      
-    <bean id="filterMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-       <beans:property name="maxUploadSize" value="1000000000" />
-		<beans:property name="maxInMemorySize" value="1000000000"/> <!-- 100MB-->
-        <property name="defaultEncoding" value="UTF-8" />
-    </bean>
+  <bean id="filterMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <beans:property name="maxUploadSize" value="1000000000" />
+  <beans:property name="maxInMemorySize" value="1000000000"/> <!-- 100MB-->
+      <property name="defaultEncoding" value="UTF-8" />
+  </bean>
 
 </beans>

@@ -13,6 +13,8 @@
 		<org.springframework-version>5.2.1.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+		<!-- <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding> -->
 	</properties>
 	<dependencies>
 
@@ -34,7 +36,14 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-	
+		
+		<!-- 암호화 라이브러리 jasypt-->
+		<dependency>  
+			<groupId>org.jasypt</groupId>  
+			<artifactId>jasypt-spring3</artifactId>  
+			<version>1.9.3</version>  
+		</dependency>
+		
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

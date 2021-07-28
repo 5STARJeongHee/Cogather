@@ -17,7 +17,7 @@ public class SpringRedisConfig {
 	public JedisConnectionFactory connectionFactory() {
 		// 기존 JedisConnectionFactory로 생으로 만들어서 host, port 설정하는 함수가 deprecated 됨
 		RedisStandaloneConfiguration connection = new RedisStandaloneConfiguration();
-		connection.setHostName("localhost");
+		connection.setHostName("redis-chat");
 		// redis 기본 포트 6379
 		connection.setPort(6379); // docker redis server 외부 포트를 20000으로 설정했음
 		
