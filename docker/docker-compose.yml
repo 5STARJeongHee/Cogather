@@ -9,10 +9,10 @@ services:
     networks: # docker에서 만든 별도의 private network
       - cogather-network
     ports:
-      - "50000:8080" # web server port : 컨테이너 내부 포트
+      - "80:8080" # web server port : 컨테이너 내부 포트
     environment:
       - TZ="Asia/Seoul" # 시간에 대한 환경변수
-      - jPass="BRACE_PASS"
+      - jPass=BRACE_PASS
     volumes:
       - ./webapps:/usr/local/tomcat/webapps # 배포할 파일을 두는 곳 volumes로 매핑해두어 파일만 갈아 끼울 수 있게 함
     depends_on: # 아래의 종속된 컨테이너가 실행된뒤에 실행됨
