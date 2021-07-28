@@ -7,4 +7,4 @@ PROJECT_NAME=cogather-webservice
 echo "> Build 파일 복사"
 cp $REPOSITORY/zip/*.war $DESTINATION/webapps
 
-cd $DESTINATION && sudo docker compose up -d 
+cd $DESTINATION && sudo docker-compose up -d 
