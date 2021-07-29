@@ -243,7 +243,8 @@ function setTimer(time, userId) {
 	var time = date[1].split(':');
 	date = date[0].split('-');
 	timer['timerId'] = setInterval("calTime()", 1000);
-	timer['entime'] = new Date(date[0], date[1] - 1, date[2], time[0], time[1], time[2]);
+	timer['entime'] = new Date(date[0], date[1] - 1, date[2], time[0] - 9, time[1], time[2]);
+	console.log(timer['entime'])
 	timer['time'] = '0:0:0';
 	if(id == userId){
 		timer['acc'] = setInterval("storeAcctime()",60000);
