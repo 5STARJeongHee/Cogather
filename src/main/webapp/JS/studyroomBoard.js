@@ -325,6 +325,7 @@ function createTempContent(){
         type : "POST",
         cache : false,
         data : data,  // POST 로 ajax request 할 경우 data 에 parameter 넘기기
+		async: false,
 		beforeSend: function(xhr){
 			xhr.setRequestHeader(header, token);
 		},

@@ -85,7 +85,7 @@ public class StudyGroupService {
 			UUID uuid = UUID.randomUUID();	//UUID 구하기
 			file_name=uuid+"."+ext;
 			System.out.println("실제 경로: " + mpRequest.getSession().getServletContext().getRealPath(Common.STUDYFILEPATH)+"\\"+file_name);
-			uploadFile.transferTo(new File(mpRequest.getSession().getServletContext().getRealPath(Common.STUDYFILEPATH)+"\\"+file_name));
+			uploadFile.transferTo(new File(mpRequest.getSession().getServletContext().getRealPath(Common.STUDYFILEPATH),file_name));
 
 
 		}
@@ -190,7 +190,7 @@ public class StudyGroupService {
 			String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
 			UUID uuid = UUID.randomUUID();	//UUID 구하기
 			file_name=uuid+"."+ext;
-			uploadFile.transferTo(new File(mpRequest.getSession().getServletContext().getRealPath(Common.STUDYFILEPATH)+file_name));
+			uploadFile.transferTo(new File(mpRequest.getSession().getServletContext().getRealPath(Common.STUDYFILEPATH),file_name));
 				
 		}
 		
