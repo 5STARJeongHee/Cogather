@@ -3,7 +3,7 @@ package com.project.cogather.memberstudy.controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -123,11 +124,18 @@ public class RestMemberStudyController {
 	}
 
 	// 방번호와 유저 아이디를 통해 누적시간 저장
+	// @PutMapping("/ms/acctime")
+	// public AjaxResult updateAcctime(
+	// 		@NotNull @Positive Integer sg_id, 
+	// 		@NotNull @Pattern(regexp = "^[0-9a-zA-Z가-힣]*$") String id, 
+	// 		@NotNull String acctime) {
 	@PutMapping("/ms/acctime")
 	public AjaxResult updateAcctime(
-			@NotNull @Positive Integer sg_id, 
-			@NotNull @Pattern(regexp = "^[0-9a-zA-Z가-힣]*$") String id, 
-			@NotNull String acctime) {
+		@RequestBody Map<String,String> map	
+	) {
+		Integer sg_id = Integer.parseInt(map.get("sg_id"));
+		String id = map.get("id");
+		String acctime = map.get("acctime");
 		AjaxResult result = new AjaxResult();
 		int cnt = 0;
 		String status = "fail";
@@ -148,9 +156,9 @@ public class RestMemberStudyController {
 			LocalDateTime time = LocalDateTime.parse(acctime, DateTimeFormatter.ISO_DATE_TIME);
 //			LocalDateTime baseTime = LocalDateTime.of(1900, 1, 1, 15, 32, 8); 
 			LocalDateTime baseTime = LocalDateTime.of(1900, 1, 1, 0, 0, 0);
-//			System.out.println("time:"+time);
-//			System.out.println("basetime:"+baseTime);
-//			System.out.println("acctime:"+acctime);
+			System.out.println("time:"+time);
+			System.out.println("basetime:"+baseTime);
+			System.out.println("acctime:"+acctime);
 			// var time = new Date(0, 0, 1, temp[0], temp[1], temp[2]);
 			// javascript 에서 위의 기준으로 맞춘 시간이 baseTime 기준 시간임.
 

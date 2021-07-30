@@ -32,7 +32,7 @@ function viewStudyList(data){
 		}
 		strTime += time[1] + "시간 "+ time[2] + "분";
 		
-		result += "<div class='single-hero-slide bg-img' style='background-image: url("+"../img/group/upload/"+data['data'][i]['file_name']+");'>";
+		result += "<div class='single-hero-slide bg-img' style='background-image: url("+"../img/group/"+data['data'][i]['file_name']+");'>";
 		result += "	<div class='container h-100'>";	
         result += " 	<div class='row h-100 align-items-center'>";    
         result += "			<div class='col-12'>" ;           

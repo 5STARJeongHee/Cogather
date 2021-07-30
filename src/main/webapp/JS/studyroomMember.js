@@ -158,7 +158,7 @@ function getMembers() {
 		success: function(data, status) {
 			if (status == "success") {
 				var background = data['study'][0]['file_name'];
-				$("body").css({'background-image':"url(../img/group/upload/"+background+")"});
+				$("body").css({'background-image':"url(../img/group/"+background+")"});
 				updateMembers(data);
 				
 				for(var i = 0; i<data['mdata'].length;i++){
@@ -243,7 +243,7 @@ function setTimer(time, userId) {
 	var time = date[1].split(':');
 	date = date[0].split('-');
 	timer['timerId'] = setInterval("calTime()", 1000);
-	timer['entime'] = new Date(date[0], date[1] - 1, date[2], time[0] - 9, time[1], time[2]);
+	timer['entime'] = new Date();
 	console.log(timer['entime'])
 	timer['time'] = '0:0:0';
 	if(id == userId){
@@ -300,9 +300,16 @@ function storeAcctime() {
 	var temp = members[id]['time'].split(':');
 	var time = new Date(Date.UTC(0, 0, 1, temp[0], temp[1], temp[2]));
 	$.ajax({
-		url: "./MemberStudyRest/ms/acctime",
+		
+		url: contextPath + "/group/MemberStudyRest/ms/acctime",
 		type: "PUT",
-		data: "sg_id=" + sg_id + "&id=" + id + "&acctime=" + time.toISOString(),
+		dataType: "json",
+		contentType:'application/json;charset=utf-8',// ajax request 할 경우 body에 넘기는 데이터 타입이 먼지 명시
+		data: JSON.stringify({ // ajax request 할 경우 body에 json object 넘기기
+			"sg_id": sg_id ,
+			"id" : id,
+			"acctime" : time.toISOString()})
+		,
 		cache: false,
 		beforeSend: function(xhr){
 			xhr.setRequestHeader(header, token);

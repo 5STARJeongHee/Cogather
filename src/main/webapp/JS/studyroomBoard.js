@@ -321,7 +321,7 @@ function createTempContent(){
 	var data = $("#frmWrite").serialize();
 	
     $.ajax({
-        url : contextPath+"/group/studyboard/",
+        url : contextPath+"/group/studyboard",// '/' 가 끝에 붙어있어 정상 동작 x -> '/' 제거
         type : "POST",
         cache : false,
         data : data,  // POST 로 ajax request 할 경우 data 에 parameter 넘기기
@@ -448,20 +448,38 @@ function chkDelete() {
 		}
 	});
 }
-
+$.fn.serializeObject= function() // json Object 형태로 바꾸는 함수
+{
+   var o= {};
+   var a= this.serializeArray();
+   $.each(a, function() {
+       if (o[this.name]) {
+           if (!o[this.name].push) {
+               o[this.name]= [o[this.name]];
+           }
+           o[this.name].push(this.value || '');
+       } else {
+           o[this.name]= this.value || '';
+       }
+   });
+   return o;
+};
 // 게시글 수정
 function chkUpdate(){
 	if($("#ct_title").val().trim() == ''){
 		alert("제목을 입력해주세요..");
 	}else{
 		CKupdate();
-    var data = $("#frmWrite").serialize();
+    var data = $("#frmWrite").serializeObject(); // formdata를 json object 형태로 변경
+	console.log(data);
 	var ct = $("#write-mode [name='ct_uid']").val();
     $.ajax({
-        url : contextPath+"/group/studyboard/",
+        url : contextPath + "/group/studyboard", // '/' 가 끝에 붙어있어 정상 동작 x -> '/' 제거
+		dataType: "json",
+		contentType:'application/json;charset=utf-8', // ajax request 할 경우 body에 넘기는 데이터 타입이 먼지 명시
         type : "PUT",
         cache : false,
-        data : data,  // PUT 로 ajax request 할 경우 data 에 parameter 넘기기
+        data : JSON.stringify(data),  // ajax request 할 경우 body에 json object 넘기기
 		beforeSend: function(xhr){
 			xhr.setRequestHeader(header, token);
 		},
@@ -612,7 +630,7 @@ function fixCommentByUser(v){
 	
 	$.ajax({
         url : contextPath+"/group/studyboard/comments/",
-        type : "PUT",
+        type : "POST",
         cache : false,
 		data : data,
 		beforeSend: function(xhr){

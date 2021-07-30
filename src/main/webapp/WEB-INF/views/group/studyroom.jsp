@@ -227,7 +227,7 @@
 	<script src="/cogather/JS/ckeditor/ckeditor.js"></script>
 	<script src="${pageContext.request.contextPath }/JS/studyroomMember.js"></script>
 	<script src="${pageContext.request.contextPath }/JS/studyroomBoard.js"></script>
-
+	
 	<script>
 		$(function(){
 			setArgs();

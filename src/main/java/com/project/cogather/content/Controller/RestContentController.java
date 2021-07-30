@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -35,7 +36,7 @@ import com.project.cogather.content.service.BoardService;
 import com.project.cogather.members.model.MembersDTO;
 import com.project.cogather.members.service.MembersService;
 
-@RequestMapping("group/studyboard")
+@RequestMapping("/group/studyboard")
 @RestController
 public class RestContentController {
 	@Autowired
@@ -170,7 +171,7 @@ public class RestContentController {
 	}
 
 	@PutMapping("")
-	public AjaxResult update(@Valid ContentDTO dto) {
+	public AjaxResult update(@RequestBody @Valid ContentDTO dto) { // @RequestBody로 json으로 넘어온 데이터 받기
 		AjaxResult result = new AjaxResult();
 		int cnt = 0;
 		StringBuffer message = new StringBuffer();
@@ -179,8 +180,10 @@ public class RestContentController {
 			cnt = boardService.update(dto);
 			if (cnt == 0) {
 				message.append("트랜잭션 실패: 게시글 수정 실패");
+				System.out.println("스터디룸 게시글 수정 실패");
 			} else {
 				status = "OK";
+				System.out.println("스터디룸 게시글 수정 성공");
 			}
 		}catch(Exception e) {
 			message.append(e.getMessage());
