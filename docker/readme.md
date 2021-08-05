@@ -244,7 +244,7 @@ sudo docker-compose up -d
 클라우드에 올리고 싶다면 클라우드 서버에 docker를 설치하고 
 해당 프로젝트 폴더를 받아서 *sudo docker-compose up -d*를 하면 된다. (위에서 변경한 설정은 반영되어 있지 않으니 변경하고 배포파일로 만든 뒤에 진행하면 된다.)
 
-### 4. AWS로의 CI/CD 
+### 4. AWS로의 CI/CD (참고 도서 :[스프링 부트와 AWS로 혼자 구현하는 웹 서비스](http://book.interpark.com/product/BookDisplay.do?_method=detail&sc.prdNo=321796760&gclid=CjwKCAjw9aiIBhA1EiwAJ_GTSoRIXNk34kMhRVt296-L5Bpf1lP_iNNTzgfv6ku0nKhkI0SXKiBSThoCCNkQAvD_BwE)
 CI 를 맡아 처리해줄 [travis](https://travis-ci.com/) 사용을 위해 구글링하여 travis 사이트에 github를 연동해두자
 
 연동했다고 끝이 아니라 travis에서 CI를 위해 배포 파일을 생성하기 위한 설정파일을 만들어두어야 한다.
