@@ -334,6 +334,25 @@ permissions는 배포 파일의 권한 설정
 
 hooks는 배포 폴더가 이동이 된후 실행할 스크립트를 설정한다.
 
+*deploy.sh*
+
+```bash
+#!/bin/bash
+
+REPOSITORY=/home/ubuntu/app/step2
+
+PROJECT_NAME=cogather-webservice
+
+echo "> Build 파일 복사"
+sudo docker stop cogather
+sudo docker rm cogather 
+rm -rf $REPOSITORY/zip/docker/webapps/*.war
+mv $REPOSITORY/zip/*.war $REPOSITORY/zip/docker/webapps/cogather.war
+# cp $REPOSITORY/zip/cogather.war $REPOSITORY/zip/docker/webapps/cogather.war
+
+cd $REPOSITORY/zip/docker && sudo docker-compose up -d 
+```
+
 스크립트는 이것으로 끝났고 나머지는 실제 EC2,S3,codedeploy, travis를 세팅하면 된다.
 
 ```
